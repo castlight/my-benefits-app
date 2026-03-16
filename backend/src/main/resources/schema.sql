@@ -1,0 +1,42 @@
+CREATE TABLE IF NOT EXISTS benefits_plans (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    network VARCHAR(50) NOT NULL,
+    deductible DECIMAL(10,2) NOT NULL,
+    deductible_met DECIMAL(10,2) NOT NULL DEFAULT 0,
+    copay DECIMAL(10,2) NOT NULL,
+    coinsurance_pct INT NOT NULL,
+    oop_max DECIMAL(10,2) NOT NULL,
+    oop_met DECIMAL(10,2) NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS members (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    plan_id BIGINT NOT NULL,
+    FOREIGN KEY (plan_id) REFERENCES benefits_plans(id)
+);
+
+CREATE TABLE IF NOT EXISTS providers (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    specialty VARCHAR(100) NOT NULL,
+    network VARCHAR(50) NOT NULL,
+    latitude DOUBLE NOT NULL,
+    longitude DOUBLE NOT NULL,
+    cost_score INT NOT NULL,
+    quality_score INT NOT NULL,
+    accepting_patients BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS help_requests (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    member_id BIGINT NOT NULL,
+    subject VARCHAR(200) NOT NULL,
+    description TEXT,
+    status VARCHAR(20) NOT NULL DEFAULT 'open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (member_id) REFERENCES members(id)
+);
