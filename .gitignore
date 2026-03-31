@@ -3,11 +3,15 @@ backend/build/
 backend/.gradle/
 *.class
 *.jar
+!gradle-wrapper.jar
 
 # Frontend
 frontend/node_modules/
 frontend/dist/
 frontend/.angular/
+
+#
+*/bin
 
 # IDE
 .idea/
@@ -20,3 +24,4 @@ frontend/.angular/
 # OS
 .DS_Store
 Thumbs.db
+

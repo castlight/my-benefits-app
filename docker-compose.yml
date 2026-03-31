@@ -47,7 +47,8 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./frontend/src:/app/src
+      - ./frontend:/app
+      - /app/node_modules
 
 volumes:
   mysql-data:
