@@ -21,7 +21,10 @@
           "builder": "@angular/build:dev-server",
           "options": {
             "buildTarget": "frontend:build",
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "proxy.conf.json",
+            "poll": 1000,
+            "hmr": false,
+            "liveReload": true
           }
         }
       }
